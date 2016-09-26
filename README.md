@@ -18,7 +18,6 @@ Easy to use and beautiful restrospective board.
 6. After creating the app you can save the new url (ex: https://funretrotest.firebaseio.com/) and replace the variable ```firebaseUrl``` inside ```js/firebaseService.js```
 7. Now you can open the app on [http://localhost:4000/](http://localhost:4000/) and start creating your boards.
    You will notice that the app has this architecture on firebase:
-![Fun retro architecture](https://i.imgur.com/etYgDia.png)
 
 ## Running the application
 
