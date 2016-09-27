@@ -14,7 +14,6 @@ angular
       $scope.userId = $window.location.hash.substring(1) || '';
       $scope.sortField = '$id';
       $scope.selectedType = 1;
-
       $scope.closeAllModals = function(){
         modalService.closeAll();
       };

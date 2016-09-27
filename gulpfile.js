@@ -29,11 +29,14 @@ gulp.task('express', function() {
 
 function notifyLiveReload(event) {
   tinylr.changed({ body: { files: [path.relative(__dirname, event.path)]}});
-  // var filepath = path.relative(__dirname, event.path);
-  // console.log(filepath);
+  var filepath = path.relative(__dirname, event.path);
+  console.log(filepath + " changed");
   // if(filepath.indexOf("dist") !== -1){
-  //   console.log(filepath + ' skipped');
   //   return;
+  // }
+  // var prefix = filepath.substring(destpath.lastIndexOf('.'));
+  // if(prefix.indexOf(".js" !== -1)){
+  //   minifyJS();
   // }
   // var destpath = 'dist\\' + filepath;
   // console.log(destpath);
@@ -108,10 +111,10 @@ gulp.task('bundle', function() {
 });
 
 gulp.task('watch', function (cb) {
-  watch('dist/*', notifyLiveReload);
   watch('**/*.html', notifyLiveReload);
   watch('**/*.scss', processSass);
   watch('**/*.scss', notifyLiveReload);
+  watch('./*.js', notifyLiveReload);
   watch('js/**/*.js', minifyJS);
 });
 
