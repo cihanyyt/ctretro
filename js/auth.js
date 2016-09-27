@@ -8,9 +8,9 @@ angular
     function logUser(user, callback) {
       mainRef.unauth();
       mainRef.authWithPassword({
-        email    : user + '@fireideaz.com',
-        password : user
-      }, function(error, authData) {
+        email: user + '@fireideaz.com',
+        password: user
+      }, function (error, authData) {
         if (error) {
           console.log('Log user failed: ', error);
           window.location.hash = '';

@@ -1,3 +1,6 @@
+var $ = require('gulp-load-plugins')();
+var tinylr;
+
 var gulp = require('gulp'),
   clean = require('gulp-clean'),
   jshint = require('gulp-jshint'),
@@ -17,17 +20,30 @@ var gulp = require('gulp'),
 gulp.task('express', function() {
   var app = express();
   app.use(connectlivereload({ port: 35729 }));
-  app.use(express.static('./dist'));
+  app.use(express.static('./'));
   var port = 4000;
   app.listen(port, '0.0.0.0', function(){
     console.log('App running and listening on port', port);
   });
 });
 
-var tinylr;
-
 function notifyLiveReload(event) {
   tinylr.changed({ body: { files: [path.relative(__dirname, event.path)]}});
+  // var filepath = path.relative(__dirname, event.path);
+  // console.log(filepath);
+  // if(filepath.indexOf("dist") !== -1){
+  //   console.log(filepath + ' skipped');
+  //   return;
+  // }
+  // var destpath = 'dist\\' + filepath;
+  // console.log(destpath);
+  // var basepath = destpath.substring(0, destpath.lastIndexOf('\\'));
+  // var srcbasepath = filepath.substring(0, destpath.lastIndexOf('\\'));
+  // var baseprefix = destpath.substring(destpath.lastIndexOf('.'));
+  // console.log(destpath + ' will be copied basepath: ' + basepath + ' baseprefix: ' + baseprefix);
+  // console.log(basepath + '\\*' + baseprefix);
+  // gulp.src(srcbasepath + '\\*.html', {base: basepath}).
+  // pipe(gulp.dest(basepath));
 }
 
 gulp.task('livereload', function() {
@@ -39,9 +55,9 @@ var bundleVendorCSS = function () {
   gulp.src(['node_modules/font-awesome/css/font-awesome.min.css',
 	   'stylesheets/vendor/*.css'])
   .pipe(concatCss('vendor.css'))
-  .pipe(gulp.dest('dist/css'))
+  .pipe(gulp.dest('./css'))
   .pipe(uglifycss())
-  .pipe(gulp.dest('dist/css'));
+  .pipe(gulp.dest('./css'));
 };
 
 var processSass = function() {
@@ -49,7 +65,7 @@ var processSass = function() {
   .pipe(sass().on('error', sass.logError))
   .pipe(gp_rename('main.css'))
   .pipe(uglifycss())
-  .pipe(gulp.dest('dist/css'));
+  .pipe(gulp.dest('./css'));
 };
 
 
@@ -62,9 +78,9 @@ var bundleVendorJS = function() {
 	   'js/vendor/*.js',
 	   'node_modules/ng-dialog/**/ngDialog*.min.js'])
       .pipe(concat('vendor.js'))
-      .pipe(gulp.dest('dist'))
+      .pipe(gulp.dest('./'))
       .pipe(uglify())
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('./'));
 
 };
 
@@ -76,7 +92,7 @@ var minifyJS = function () {
       .pipe(sourcemaps.init())
       .pipe(concat('main.js'))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('./'));
 };
 
 gulp.task('clean-dist', function () {
