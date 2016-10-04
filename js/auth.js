@@ -4,12 +4,11 @@ angular
   .module('fireideaz')
   .service('Auth', function () {
     var mainRef = new Firebase('https://ctretro.firebaseio.com');
-
-    function logUser(user, callback) {
+    function logUser(email, pass, callback) {
       mainRef.unauth();
       mainRef.authWithPassword({
-        email: user + '@fireideaz.com',
-        password: user
+        email: email,
+        password: pass
       }, function (error, authData) {
         if (error) {
           console.log('Log user failed: ', error);
@@ -20,17 +19,15 @@ angular
         }
       });
     }
-
-    function createUserAndLog(newUser, callback) {
+    function createUserAndLog(email, pass, callback) {
       mainRef.createUser({
-        email    : newUser + '@fireideaz.com',
-        password : newUser
+        email    : email,
+        password : pass
       }, function(error) {
         if (error) {
-          console.log('Create user failed: ', error);
-        } else {
-          logUser(newUser, callback);
+          console.log('Create user failed: try to log in', error);
         }
+        logUser(email, pass, callback);
       });
     }
     return {

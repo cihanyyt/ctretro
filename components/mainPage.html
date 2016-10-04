@@ -1,6 +1,30 @@
 <div class="home" ng-show="userId === ''" ng-cloak>
   <section>
     <h1><img src="img/logo.png" />CT Retro</h1>
+      <div class="wrapper">
+          <form name="Login_Form" class="form-signin" ng-submit="login()">
+              <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+              <hr class="colorgraph"><br>
+
+              <div class="form-signin-control">
+                <input type="email" class="form-control" pattern="[^ @]*@[^ @]*"  ng-model="Email" placeholder="Company Email" required="true" autofocus="" />
+              </div>
+              <div class="form-signin-control">
+                <input type="password" class="form-control" ng-model="Password" placeholder="Password / Do not provide Siemens credentials" required="true"/>
+              </div>
+              <button name="Submit" value="Login" type="submit">LOGIN</button>
+          </form>
+      </div>
+
+      <!--<div class="list-group">-->
+          <!--<a href="#" class="list-group-item active">-->
+              <!--Cras justo odio-->
+          <!--</a>-->
+          <!--<a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>-->
+          <!--<a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>-->
+          <!--<a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>-->
+          <!--<a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>-->
+      <!--</div>-->
     <button ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
     <style type="text/css">
       #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }

@@ -8,6 +8,7 @@ angular
       $scope.loading = true;
       $scope.messageTypes = utils.messageTypes;
       $scope.utils = utils;
+      $scope.auth = auth;
       $scope.newBoard = {
         name: ''
       };
@@ -17,6 +18,14 @@ angular
       $scope.closeAllModals = function(){
         modalService.closeAll();
       };
+
+      $scope.login = function() {
+        auth.createUserAndLog($scope.Email, $scope.Password, listBoards);
+      };
+      
+      function listBoards(authData) {
+        alert('anan: ' + authData.uid);
+      }
 
       function getBoardAndMessages(userData) {
         $scope.userId = $window.location.hash.substring(1) || '499sm';
@@ -100,8 +109,6 @@ angular
 
           $scope.newBoard.name = '';
         };
-
-        auth.createUserAndLog($scope.userId, callback);
       };
 
       $scope.changeBoardContext = function() {
