@@ -4,6 +4,11 @@ angular
   .module('fireideaz')
   .service('Auth', function () {
     var mainRef = new Firebase('https://ctretro.firebaseio.com');
+
+    function getCurrentUser() {
+      return mainRef.getAuth();
+    }
+
     function logUser(email, pass, callback) {
       mainRef.unauth();
       mainRef.authWithPassword({
@@ -12,11 +17,8 @@ angular
       }, function (error, authData) {
         if (error) {
           console.log('Log user failed: ', error);
-          window.location.hash = '';
-          location.reload();
-        } else {
-          callback(authData);
         }
+        callback(authData);
       });
     }
     function createUserAndLog(email, pass, callback) {
@@ -31,6 +33,7 @@ angular
       });
     }
     return {
+      getCurrentUser : getCurrentUser,
       createUserAndLog: createUserAndLog,
       logUser: logUser
     };

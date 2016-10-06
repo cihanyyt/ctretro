@@ -6,7 +6,7 @@ angular
               '$window', 'Auth', '$rootScope', 'FirebaseService', 'ModalService',
     function($scope, $filter, $window, auth, $rootScope, firebaseService, modalService) {
       $scope.modalService = modalService;
-      $scope.userId = $window.location.hash.substring(1);
+      $scope.boardId = $window.location.hash.substring(1);
 
       $scope.droppedEvent = function(dragEl, dropEl) {
         if(dragEl !== dropEl) {
@@ -21,8 +21,8 @@ angular
         var drag = $('#' + dragEl);
         var drop = $('#' + dropEl);
 
-        var dropMessageRef = firebaseService.getMessageRef($scope.userId, drop.attr('messageId'));
-        var dragMessageRef = firebaseService.getMessageRef($scope.userId, drag.attr('messageId'));
+        var dropMessageRef = firebaseService.getMessageRef($scope.boardId, drop.attr('messageId'));
+        var dragMessageRef = firebaseService.getMessageRef($scope.boardId, drag.attr('messageId'));
 
         dropMessageRef.once('value', function(dropMessage) {
           dragMessageRef.once('value', function(dragMessage) {

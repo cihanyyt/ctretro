@@ -3,7 +3,7 @@
 angular
   .module('fireideaz')
   .service('Utils', [function () {
-    function createUserId() {
+    function createBoardId() {
       var text = '';
       var possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -55,7 +55,7 @@ angular
     }
 
     return {
-      createUserId: createUserId,
+      createBoardId: createBoardId,
       alreadyVoted: alreadyVoted,
       focusElement: focusElement,
       messageTypes: messageTypes,

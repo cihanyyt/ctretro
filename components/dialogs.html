@@ -19,8 +19,10 @@
 <script type="text/ng-template" id="addNewBoard">
   <h1>New board</h1>
   <p>Board name example: <strong>team-board-123</strong></p>
-  <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
-  <button ng-click="createNewBoard()" ng-show="newBoard.name.length">Create</button>
+  <form ng-submit="createNewBoard()">
+      <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
+      <button type="submit" ng-show="newBoard.name.length">Create</button>
+  </form>
 </script>
 <script type="text/ng-template" id="deleteCard">
   <h1>Delete note</h1>

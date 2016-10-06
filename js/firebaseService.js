@@ -13,20 +13,24 @@ angular
       return Firebase.ServerValue.TIMESTAMP;
     }
 
-    function getMessagesRef(userId) {
-      return new Firebase(firebaseUrl + '/messages/' + userId);
+    function getMessagesRef(boardId) {
+      return new Firebase(firebaseUrl + '/messages/' + boardId);
     }
 
-    function getMessageRef(userId, messageId) {
-      return new Firebase(firebaseUrl + '/messages/' + userId + '/' + messageId);
+    function getMessageRef(boardId, messageId) {
+      return new Firebase(firebaseUrl + '/messages/' + boardId + '/' + messageId);
     }
 
-    function getBoardRef(userId) {
-      return new Firebase(firebaseUrl + '/boards/' + userId);
+    function getBoardsRef(){
+      return new Firebase(firebaseUrl + '/boards');
     }
 
-    function getBoardColumns(userId) {
-      return new Firebase(firebaseUrl + '/boards/' + userId + '/columns');
+    function getBoardRef(boardId) {
+      return new Firebase(firebaseUrl + '/boards/' + boardId);
+    }
+
+    function getBoardColumns(boardId) {
+      return new Firebase(firebaseUrl + '/boards/' + boardId + '/columns');
     }
 
     return {
@@ -34,6 +38,7 @@ angular
       getServerTimestamp: getServerTimestamp,
       getMessagesRef: getMessagesRef,
       getMessageRef: getMessageRef,
+      getBoardsRef: getBoardsRef,
       getBoardRef: getBoardRef,
       getBoardColumns: getBoardColumns
     };

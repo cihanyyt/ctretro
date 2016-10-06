@@ -24,14 +24,15 @@
 
 
 ## TODO
-Login mail+pass no register
-new board olcak
+Login mail+pass no register             done
+new board                               done
 list all boards
-Remove Delete all cards
+Remove Delete all cards                 done
 online users @footer
 owner of cards
+owner of board                          done
 voter list?
 active/done state Finish Button
-Enter submits
+Enter submits                           done
 Delete if admin
 Admin user
