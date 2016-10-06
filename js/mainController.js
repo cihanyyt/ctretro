@@ -114,6 +114,12 @@ angular
           window.location.pathname + '#' + $scope.boardId;
       }
 
+      $scope.redirectToBoard = function(boardId) {
+        alert(boardId);
+        window.location.href = window.location.origin +
+          window.location.pathname + '#' + boardId;
+      }
+
       $scope.createNewBoard = function() {
         $scope.loading = true;
         modalService.closeAll();
@@ -192,6 +198,13 @@ angular
           date: firebaseService.getServerTimestamp(),
           votes: 0
         }).then(addMessageCallback);
+      };
+
+      $scope.keydown = function(value){
+        if ((value.keyCode == 10 || value.keyCode == 13) && value.ctrlKey)
+        {
+          document.getElementById("btndone").click();
+        }
       };
 
       $scope.deleteCards = function() {

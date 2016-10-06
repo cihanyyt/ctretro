@@ -40,9 +40,9 @@
               <div class="back">
                   <div class="message-body">
                       <div class="editing">
-                          <textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+                          <textarea ng-keydown="keydown($event)" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
                           <a class="delete-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)"><i class="fa fa-trash"></i></a>
-                          <button ng-click="isEditing = false;">DONE</button>
+                          <button id="btndone" ng-click="isEditing = false;">DONE</button>
                       </div>
                   </div>
               </div>

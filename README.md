@@ -26,7 +26,7 @@
 ## TODO
 Login mail+pass no register             done
 new board                               done
-list all boards
+list all boards                         done
 Remove Delete all cards                 done
 online users @footer
 owner of cards

@@ -18,22 +18,13 @@
           </form>
       </div>
 
-          <div>
-              <h4>Boards</h4>
-              <ul></ul>
-              <table class="table table-hover boards-table">
-                  <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Date</th>
-                      <th></th>
-                  </tr>
-                  </thead>
+          <div class="wrapper boards-table" ng-show="currentUser">
+              <h4 class="pull-left"><strong>Boards</strong></h4>
+              <table class="table table-hover">
                   <tbody>
-                  <tr ng-repeat="board in boards" ng-click="">
+                  <tr ng-repeat="board in boards">
                       <td>{{board.boardName}}</td>
-                      <td>{{board.date_created.toLocaleDateString()}}</td>
-                      <td><a class="btn btn-danger btn-sm" ng-click="">Delete</a></td>
+                      <td><a ng-click="redirectToBoard(board.$id)">Go!</a></td>
                   </tr>
                   </tbody>
               </table>
