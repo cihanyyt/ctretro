@@ -1,5 +1,5 @@
 <header ng-show="boardId !== ''">
-    <h1>CT Retro</h1>
+    <h1><a ng-click="redirectToMain()">CT Retro</a> </h1>
     <span>
       <button id="copy-board" ng-click="modalService.openCopyBoard(this)">Export board</button>
       <button class="first" ng-click="modalService.openAddNewBoard(this)">New board</button>

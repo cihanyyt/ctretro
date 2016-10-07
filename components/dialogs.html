@@ -14,31 +14,37 @@
 <script type="text/ng-template" id="addNewColumn">
   <h1>New column</h1>
   <input ng-model="newColumn" type="text"></input>
-  <button ng-click="addNewColumn(newColumn); newColumn='';">Add</button>
+  <button ng-click="addNewColumn(newColumn); newColumn='';" ng-show="newColumn.length">Add</button>
 </script>
 <script type="text/ng-template" id="addNewBoard">
   <h1>New board</h1>
-  <p>Board name example: <strong>team-board-123</strong></p>
+  <p>Board name example: <strong>team-board-02.06.2016</strong></p>
   <form ng-submit="createNewBoard()">
       <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
       <button type="submit" ng-show="newBoard.name.length">Create</button>
   </form>
 </script>
 <script type="text/ng-template" id="deleteCard">
-  <h1>Delete note</h1>
-  <p>Are you sure you want to delete this note?</strong></p>
-  <button class="delete-button" ng-click="deleteMessage(message)">Delete</button>
-  <a ng-click="closeAllModals()">Cancel</a>
+  <form ng-submit="deleteMessage(message)">
+      <h1>Delete note</h1>
+      <p>Are you sure you want to delete this note?</strong></p>
+      <button class="delete-button" type="submit">Delete</button>
+      <a ng-click="closeAllModals()">Cancel</a>
+  </form>
 </script>
 <script type="text/ng-template" id="deleteColumn">
-  <h1>Delete column</h1>
-  <p>Are you sure you want to delete this column?</strong></p>
-  <button class="delete-button" ng-click="deleteColumn(type)">Delete</button>
-  <a ng-click="closeAllModals()">Cancel</a>
+    <form ng-submit="deleteColumn(type)">
+        <h1>Delete column</h1>
+        <p>Are you sure you want to delete this column?</strong></p>
+        <button class="delete-button" type="submit">Delete</button>
+        <a ng-click="closeAllModals()">Cancel</a>
+    </form>
 </script>
 <script type="text/ng-template" id="mergeCards">
-  <h1>Merge cards</h1>
-  <p>Are you sure you want to merge these two cards?</strong></p>
-  <button ng-controller="MessageCtrl" class="delete-button" ng-click="dropped(dragEl, dropEl)">Merge</button>
-  <a ng-click="closeAllModals()">Cancel</a>
+    <form ng-submit="dropped(dragEl, dropEl)">
+        <h1>Merge cards</h1>
+        <p>Are you sure you want to merge these two cards?</strong></p>
+        <button ng-controller="MessageCtrl" class="delete-button" type="submit">Merge</button>
+        <a ng-click="closeAllModals()">Cancel</a>
+    </form>
 </script>

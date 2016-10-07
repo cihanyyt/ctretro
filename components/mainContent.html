@@ -27,7 +27,7 @@
             <div messageId="{{ message.$id }}" x-lvl-draggable="true" x-lvl-drop-target="true" x-on-drop="droppedEvent(dragEl, dropEl)">
               <div class="front">
                   <div class="message-body">
-                      <div class="text">{{message.text}}</div>
+                      <div class="text" ng-dblclick="isEditing =! isEditing;">{{message.text}}</div>
                       <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
@@ -40,7 +40,7 @@
               <div class="back">
                   <div class="message-body">
                       <div class="editing">
-                          <textarea ng-keydown="keydown($event)" ng-model="message.text" ng-change="messages.$save(message)"></textarea>
+                          <textarea ng-model="message.text" ng-change="messages.$save(message)"></textarea>
                           <a class="delete-link" href="javascript:void(0)" ng-click="modalService.openDeleteCard(this)"><i class="fa fa-trash"></i></a>
                           <button id="btndone" ng-click="isEditing = false;">DONE</button>
                       </div>

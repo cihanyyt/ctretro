@@ -45,7 +45,7 @@ angular
       }
 
       function listboards(){
-        var boards = firebaseService.newFirebaseArray(firebaseService.getBoardsRef());
+        var boards = firebaseService.newFirebaseArray(firebaseService.getBoardsRef().orderByChild("date_created"));
         boards.$loaded(function () {
           $scope.boards = boards;
         });
@@ -114,8 +114,12 @@ angular
           window.location.pathname + '#' + $scope.boardId;
       }
 
+      $scope.redirectToMain = function(){
+        window.location.href = window.location.origin;
+        $scope.boardId = '';
+      }
+
       $scope.redirectToBoard = function(boardId) {
-        alert(boardId);
         window.location.href = window.location.origin +
           window.location.pathname + '#' + boardId;
       }
@@ -127,7 +131,7 @@ angular
         var board = firebaseService.getBoardRef($scope.boardId);
         board.set({
           boardName: $scope.newBoard.name,
-          date_created: new Date().toString(),
+          date_created: new Date().getTime(),
           columns: $scope.messageTypes,
           user_id: auth.getCurrentUser().uid
         });

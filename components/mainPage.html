@@ -3,6 +3,8 @@
     <h1><img src="img/logo.png" />CT Retro</h1>
       <h3 class="form-signin-heading" ng-show="currentUser">Welcome Back! {{currentUser.password.email.split('@')[0]}}</h3>
       <h3 class="form-signin-heading bg-danger">{{error}}</h3>
+      <button ng-model="newboard" ng-show="currentUser" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
+<br/><br/><br/>
       <div ng-model="loginform" ng-hide="currentUser" class="wrapper">
           <form name="Login_Form" class="form-signin" ng-submit="login()">
               <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
@@ -18,19 +20,19 @@
           </form>
       </div>
 
-          <div class="wrapper boards-table" ng-show="currentUser">
-              <h4 class="pull-left"><strong>Boards</strong></h4>
-              <table class="table table-hover">
+              <table class="table table-hover boards-table" ng-show="currentUser">
                   <tbody>
                   <tr ng-repeat="board in boards">
                       <td>{{board.boardName}}</td>
-                      <td><a ng-click="redirectToBoard(board.$id)">Go!</a></td>
+                      <td><a ng-click="redirectToBoard(board.$id)">Go to Board</a></td>
+                      <td><a ng-click="redirectToBoard(board.$id)">Results</a></td>
                   </tr>
                   </tbody>
               </table>
-          </div>
-    <button ng-model="newboard" ng-show="currentUser" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
-    <style type="text/css">
+
+      <button ng-model="newboard" ng-show="currentUser" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
+
+      <style type="text/css">
       #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
     </style>
     <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
