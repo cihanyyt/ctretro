@@ -2,7 +2,7 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['$firebaseArray', function ($firebaseArray) {
+  .service('FirebaseService', ['$firebaseArray', 'Auth', function ($firebaseArray, auth) {
     var firebaseUrl = 'https://ctretro.firebaseio.com';
 
     function newFirebaseArray(messagesRef) {
@@ -33,6 +33,24 @@ angular
       return new Firebase(firebaseUrl + '/boards/' + boardId + '/columns');
     }
 
+    function setPresence(userId, boardId) {
+        if(boardId == '')
+            return;
+        var userRef = new Firebase(firebaseUrl + '/presence/' + boardId + '/' + userId);
+        userRef.set(auth.getCurrentUser().password.email.split('@')[0]);
+
+        var presenceRef = new Firebase(firebaseUrl + '/.info/connected');
+        presenceRef.on("value", function(snap) {
+            if (snap.val()) {
+                userRef.onDisconnect().remove();
+            }
+        });
+    }
+
+    function resetPresence(userId) {
+        setPresence(userId, '');
+    }
+
     return {
       newFirebaseArray: newFirebaseArray,
       getServerTimestamp: getServerTimestamp,
@@ -40,6 +58,8 @@ angular
       getMessageRef: getMessageRef,
       getBoardsRef: getBoardsRef,
       getBoardRef: getBoardRef,
-      getBoardColumns: getBoardColumns
+      getBoardColumns: getBoardColumns,
+      setPresence: setPresence,
+      resetPresence: resetPresence
     };
   }]);

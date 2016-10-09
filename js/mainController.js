@@ -66,6 +66,7 @@ angular
         $scope.userUid = auth.getCurrentUser().uid;
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
         $scope.loading = false;
+        firebaseService.setPresence($scope.userUid, $scope.boardId.substring(1));
       }
 
       if ($scope.boardId !== '') {
@@ -93,6 +94,7 @@ angular
 
       $scope.toggleVote = function(key, votes) {
         if (!localStorage.getItem(key)) {
+          var messagesRef = firebaseService.getMessagesRef($scope.boardId);
           messagesRef.child(key).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
@@ -195,7 +197,7 @@ angular
       $scope.addNewMessage = function(type) {
         $scope.messages.$add({
           text: '',
-          user_id: $scope.userUid,
+          user_name: auth.getCurrentUser().password.email.split('@')[0],
           type: {
             id: type.id
           },

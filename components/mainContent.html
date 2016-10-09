@@ -31,6 +31,7 @@
                       <a href="javascript:void(0)" class="pencil" ng-click="isEditing = true; utils.focusElement(message.$id);"><i class="fa fa-pencil"></i></a>
                   </div>
                   <div class="votes">
+                      Owner: {{message.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <a ng-hide="utils.alreadyVoted(message.$id)" href="javascript:void(0)" ng-click="toggleVote(message.$id, message.votes)">
                           <i class="fa fa-thumbs-o-up"></i>
                       </a>

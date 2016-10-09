@@ -29,7 +29,7 @@ new board                               done
 list all boards                         done
 Remove Delete all cards                 done
 online users @footer
-owner of cards
+owner of cards                          done
 owner of board                          done
 voter list?
 active/done state Finish Button
