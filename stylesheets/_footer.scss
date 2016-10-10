@@ -8,3 +8,19 @@ footer {
   align-items: center;
   background-color: $teal;
 }
+
+.onlineusers{
+  display: inline-block;
+  margin-left: 10px;
+  zoom:1;
+  *display:inline;
+}
+
+.onlineusers ul{
+  list-style-type: none !important;
+}
+
+
+.footer{
+  display: inline-block;
+}

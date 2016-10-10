@@ -51,6 +51,12 @@ angular
         setPresence(userId, '');
     }
 
+    function getOnlineUsers(boardId){
+      var boardPresenceRef = new Firebase(firebaseUrl + '/presence/' + boardId);
+      return newFirebaseArray(boardPresenceRef);
+    }
+
+
     return {
       newFirebaseArray: newFirebaseArray,
       getServerTimestamp: getServerTimestamp,
@@ -60,6 +66,7 @@ angular
       getBoardRef: getBoardRef,
       getBoardColumns: getBoardColumns,
       setPresence: setPresence,
-      resetPresence: resetPresence
+      resetPresence: resetPresence,
+      getOnlineUsers: getOnlineUsers
     };
   }]);

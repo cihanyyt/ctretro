@@ -1,3 +1,8 @@
 <footer ng-show="boardId !== ''">
-    <a ng-click="redirectToMain()">CT Retro</a>
+    <div class="footer">
+        <a ng-click="redirectToMain()">Session({{userlist.length}}):</a>
+        <ul class="onlineusers" style="list-style-type: none" ng-repeat="user in userlist">
+            <li>{{user.$value}}</li>
+        </ul>
+    </div>
 </footer>

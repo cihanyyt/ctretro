@@ -28,10 +28,11 @@ Login mail+pass no register             done
 new board                               done
 list all boards                         done
 Remove Delete all cards                 done
-online users @footer
+online users @footer                    done
 owner of cards                          done
 owner of board                          done
-voter list?
+voter list?                             N/a
+vote count                              
 active/done state Finish Button
 Enter submits                           done
 Delete if admin

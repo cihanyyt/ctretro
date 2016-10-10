@@ -67,6 +67,10 @@ angular
         $scope.messages = firebaseService.newFirebaseArray(messagesRef);
         $scope.loading = false;
         firebaseService.setPresence($scope.userUid, $scope.boardId.substring(1));
+        var userlist = firebaseService.getOnlineUsers($scope.boardId.substring(1));
+        userlist.$loaded(function () {
+            $scope.userlist = userlist;
+        });
       }
 
       if ($scope.boardId !== '') {
@@ -131,15 +135,16 @@ angular
         modalService.closeAll();
         $scope.boardId = utils.createBoardId();
         var board = firebaseService.getBoardRef($scope.boardId);
+        alert($scope.votecount);
         board.set({
           boardName: $scope.newBoard.name,
+          votecount: $scope.votecount,
           date_created: new Date().getTime(),
           columns: $scope.messageTypes,
           user_id: auth.getCurrentUser().uid
         });
 
         redirectToBoard();
-
         $scope.newBoard.name = '';
       };
 

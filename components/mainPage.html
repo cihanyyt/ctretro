@@ -25,12 +25,11 @@
                   <tr ng-repeat="board in boards">
                       <td>{{board.boardName}}</td>
                       <td><a ng-click="redirectToBoard(board.$id)">Go to Board</a></td>
-                      <td><a ng-click="redirectToBoard(board.$id)">Results</a></td>
                   </tr>
                   </tbody>
               </table>
 
-      <button ng-model="newboard" ng-show="currentUser" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
+      <button ng-model="newboard" ng-show="currentUser && boards.length > 10" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
 
       <style type="text/css">
       #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }

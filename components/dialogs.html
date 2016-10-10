@@ -20,8 +20,12 @@
   <h1>New board</h1>
   <p>Board name example: <strong>team-board-02.06.2016</strong></p>
   <form ng-submit="createNewBoard()">
-      <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
-      <button type="submit" ng-show="newBoard.name.length">Create</button>
+      <div>
+          <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
+          <br/>
+          <input ng-model="votecount" type="text" placeholder="Votes (3 Default)" ng-pattern="/^\d+$/" maxlength="2"></input>
+          <button type="submit" ng-show="newBoard.name.length">Create</button>
+      </div>
   </form>
 </script>
 <script type="text/ng-template" id="deleteCard">
