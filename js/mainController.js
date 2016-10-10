@@ -10,19 +10,22 @@ angular
       $scope.utils = utils;
       $scope.auth = auth;
       $scope.newBoard = {
-        name: ''
+        name: '',
+        votecount: ''
       };
       $scope.boardId = $window.location.hash.substring(1) || '';
-      $scope.currentUser = auth.getCurrentUser();
       $scope.sortField = '$id';
       $scope.selectedType = 1;
       $scope.closeAllModals = function(){
         modalService.closeAll();
       };
 
-      if($scope.currentUser){
+      if(auth.getCurrentUser()){
+        $scope.currentUser = auth.getCurrentUser();
         listboards();
       }
+
+
 
       $scope.login = function() {
         auth.createUserAndLog($scope.Email, $scope.Password, loginresult);
@@ -51,7 +54,15 @@ angular
         });
       }
 
+      $scope.redirectToMain = function(){
+        window.location.href = window.location.origin;
+        $scope.boardId = '';
+      }
+
       function getBoardAndMessages() {
+        if(!auth.getCurrentUser()){
+          $scope.redirectToMain();
+        }
         $scope.boardId = $window.location.hash.substring(1) || '499sm';
         var messagesRef = firebaseService.getMessagesRef($scope.boardId);
         var board = firebaseService.getBoardRef($scope.boardId);
@@ -60,6 +71,10 @@ angular
           $scope.board = board.val();
           $scope.boardName = $rootScope.boardName = board.val().boardName;
           $scope.boardContext = $rootScope.boardContext = board.val().boardContext;
+          $scope.votecount = board.val().votecount;
+          var votesremain = localStorage.getItem($scope.boardId);
+          if(!votesremain)
+            localStorage.setItem($scope.boardId, Number($scope.votecount));
         });
 
         $scope.boardRef = board;
@@ -70,6 +85,20 @@ angular
         var userlist = firebaseService.getOnlineUsers($scope.boardId.substring(1));
         userlist.$loaded(function () {
             $scope.userlist = userlist;
+        });
+      }
+
+      $scope.saveVoteCount = function () {
+        var board = firebaseService.getBoardRef($scope.boardId);
+        board.on('value', function(data) {
+          var votecount = Number(data.val().votecount);
+          if(votecount == $scope.votecount)
+            return;
+          var voteremain = Number(localStorage.getItem($scope.boardId));
+          localStorage.setItem($scope.boardId, Number(voteremain + ($scope.votecount - votecount)));
+          board.update({
+            votecount: $scope.votecount
+          });
         });
       }
 
@@ -96,9 +125,16 @@ angular
         return $scope.sortField === 'votes' ? true : false;
       };
 
-      $scope.toggleVote = function(key, votes) {
+      $scope.toggleVote = function (key, votes) {
+        var votesremain = Number(localStorage.getItem($scope.boardId));
         if (!localStorage.getItem(key)) {
           var messagesRef = firebaseService.getMessagesRef($scope.boardId);
+          console.log(votesremain);
+          if (--votesremain < 0) {
+            alert('You have used all your votes.');
+            return;
+          }
+          localStorage.setItem($scope.boardId, Number(votesremain));
           messagesRef.child(key).update({
             votes: votes + 1,
             date: firebaseService.getServerTimestamp()
@@ -106,6 +142,13 @@ angular
 
           localStorage.setItem(key, 1);
         } else {
+          votesremain++;
+          if (votesremain > $scope.votecount) {
+            votesremain = $scope.votecount;
+          }
+          console.log(votesremain);
+          localStorage.setItem($scope.boardId, Number(votesremain));
+          var messagesRef = firebaseService.getMessagesRef($scope.boardId);
           messagesRef.child(key).update({
             votes: votes - 1,
             date: firebaseService.getServerTimestamp()
@@ -120,11 +163,6 @@ angular
           window.location.pathname + '#' + $scope.boardId;
       }
 
-      $scope.redirectToMain = function(){
-        window.location.href = window.location.origin;
-        $scope.boardId = '';
-      }
-
       $scope.redirectToBoard = function(boardId) {
         window.location.href = window.location.origin +
           window.location.pathname + '#' + boardId;
@@ -135,10 +173,12 @@ angular
         modalService.closeAll();
         $scope.boardId = utils.createBoardId();
         var board = firebaseService.getBoardRef($scope.boardId);
-        alert($scope.votecount);
+        if(isNaN($scope.newBoard.votecount)){
+          $scope.newBoard.votecount = 3;
+        }
         board.set({
           boardName: $scope.newBoard.name,
-          votecount: $scope.votecount,
+          votecount: $scope.newBoard.votecount,
           date_created: new Date().getTime(),
           columns: $scope.messageTypes,
           user_id: auth.getCurrentUser().uid
@@ -146,6 +186,7 @@ angular
 
         redirectToBoard();
         $scope.newBoard.name = '';
+        $scope.newBoard.votecount = '';
       };
 
       $scope.changeBoardContext = function() {
@@ -224,6 +265,12 @@ angular
         });
 
         modalService.closeAll();
+      };
+
+      $scope.logOut = function() {
+        auth.logout();
+        modalService.closeAll();
+        $scope.redirectToMain();
       };
 
       $scope.getBoardText = function() {

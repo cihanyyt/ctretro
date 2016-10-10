@@ -23,7 +23,7 @@
       <div>
           <input ng-model="newBoard.name" type="text" placeholder="Board name"></input>
           <br/>
-          <input ng-model="votecount" type="text" placeholder="Votes (3 Default)" ng-pattern="/^\d+$/" maxlength="2"></input>
+          <input ng-model="newBoard.votecount" type="text" placeholder="Votes (3 Default)" ng-pattern="/^\d+$/" maxlength="2"></input>
           <button type="submit" ng-show="newBoard.name.length">Create</button>
       </div>
   </form>
@@ -49,6 +49,14 @@
         <h1>Merge cards</h1>
         <p>Are you sure you want to merge these two cards?</strong></p>
         <button ng-controller="MessageCtrl" class="delete-button" type="submit">Merge</button>
+        <a ng-click="closeAllModals()">Cancel</a>
+    </form>
+</script>
+<script type="text/ng-template" id="logOut">
+    <form ng-submit="logOut()">
+        <h1>Logout</h1>
+        <p>Are you sure you want logout?</strong></p>
+        <button ng-controller="MessageCtrl" class="delete-button" type="submit">Logout</button>
         <a ng-click="closeAllModals()">Cancel</a>
     </form>
 </script>

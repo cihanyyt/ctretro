@@ -54,6 +54,13 @@ angular
           scope: scope
         });
       },
+      logOut: function(scope) {
+        ngDialog.open({
+          template: 'logOut',
+          className: 'ngdialog-theme-plain danger',
+          scope: scope
+        });
+      },
       closeAll: function() {
         ngDialog.closeAll();
       }

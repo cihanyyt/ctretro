@@ -9,6 +9,10 @@ angular
       return mainRef.getAuth();
     }
 
+    function logout(){
+        mainRef.unauth();
+    }
+
     function logUser(email, pass, callback) {
       mainRef.unauth();
       mainRef.authWithPassword({
@@ -35,6 +39,7 @@ angular
     return {
       getCurrentUser : getCurrentUser,
       createUserAndLog: createUserAndLog,
-      logUser: logUser
+      logUser: logUser,
+      logout:logout
     };
   });

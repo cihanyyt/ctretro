@@ -18,6 +18,12 @@
     }
   }
 
+  .small {
+    font-size:13px;
+    width: 50px;
+    font-family:tahoma arial;
+  }
+
   @media (max-width: 500px) {
     display: block;
 

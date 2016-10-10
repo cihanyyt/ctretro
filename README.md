@@ -32,7 +32,7 @@ online users @footer                    done
 owner of cards                          done
 owner of board                          done
 voter list?                             N/a
-vote count                              
+vote count                              done
 active/done state Finish Button
 Enter submits                           done
 Delete if admin

@@ -2,8 +2,12 @@
 
 angular
   .module('fireideaz')
-  .service('FirebaseService', ['$firebaseArray', 'Auth', function ($firebaseArray, auth) {
+  .service('FirebaseService', ['$firebaseArray', '$firebaseObject', 'Auth', function ($firebaseArray, $firebaseObject, auth) {
     var firebaseUrl = 'https://ctretro.firebaseio.com';
+
+    function newFirebaseObject(ref) {
+        return $firebaseObject(ref);
+    }
 
     function newFirebaseArray(messagesRef) {
       return $firebaseArray(messagesRef);
@@ -58,6 +62,7 @@ angular
 
 
     return {
+      newFirebaseObject: newFirebaseObject,
       newFirebaseArray: newFirebaseArray,
       getServerTimestamp: getServerTimestamp,
       getMessagesRef: getMessagesRef,

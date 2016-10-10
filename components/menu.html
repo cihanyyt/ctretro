@@ -6,6 +6,9 @@
       <option value="$id">Created date</option>
       <option value="votes">Votes</option>
     </select>
+     &nbsp;&nbsp;Max Vote Count&nbsp;&nbsp;&nbsp; <input class="small" ng-model="votecount" type="text" ng-pattern="/^\d+$/" maxlength="2"></input>
+    <button style="height: 22px;" type="submit" ng-click="saveVoteCount()">Update</button>
+
     <button class="pull-right new-column" ng-show="board.columns.length < 6" ng-click="modalService.openAddNewColumn(this)">New column</button>
   </span>
 </div>

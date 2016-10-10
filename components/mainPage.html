@@ -1,7 +1,7 @@
 <div class="home" ng-show="boardId === ''" ng-cloak>
   <section>
     <h1><img src="img/logo.png" />CT Retro</h1>
-      <h3 class="form-signin-heading" ng-show="currentUser">Welcome Back! {{currentUser.password.email.split('@')[0]}}</h3>
+      <h3 class="form-signin-heading" ng-show="currentUser">Welcome Back! <a ng-click="modalService.logOut(this)">{{currentUser.password.email.split('@')[0]}}</a></h3>
       <h3 class="form-signin-heading bg-danger">{{error}}</h3>
       <button ng-model="newboard" ng-show="currentUser" ng-click="modalService.openAddNewBoard(this)">NEW BOARD</button>
 <br/><br/><br/>
